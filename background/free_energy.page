@@ -1,0 +1,33 @@
+(use html-tags)
+(set-title! "Background")
+(set-subtitle! "Why Free Energy?")
+(add-tag! "background" 0)
+(set-up! "/index.html")
+
+(<p>
+"Why the site title, then, if I'm not trying to put the electric
+company out of business? Well, way back in the misty dawn of time I
+earned a bachelor's degree in physics. Amazingly, I still remember
+some of it, and the title is a reference to thermodynamics.  Everybody
+knows about entropy (not really, but a lot of folks seem willing to
+talk about it without understanding it). Entropy is always increasing,
+right? And it's something or other to do with disorder."
+)
+
+(<p>
+"But entropy has a less famous twin: enthalpy. It's sometimes called
+the Gibbs free energy, or just free energy. Oversimplifying a bit, the
+entropy of a closed system is the energy in the system that you can't
+get any use out of, and the free energy is the energy that you " (<em> "can")
+" get some use out of. So, if entropy is disorder, then its twin, free
+energy, is order. And this site is an attempt to increase the order in
+my universe of projects."  )
+
+(<p>
+"(This is strictly a metaphor, by the way; to be precise about it, I'd
+need to haul out mathematics. I'll trot out math as necessary in other
+places on this site, but it isn't necessary here. In the specific case
+of thermodynamics, I'd also have to haul out and review a textbook or
+two; it's been a while, and I'd embarrass myself if I tried to talk
+precisely about it off the cuff.)"
+)

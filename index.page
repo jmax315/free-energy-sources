@@ -1,0 +1,59 @@
+(use html-tags)
+
+(set-title! "Welcome")
+
+(<p> "Welcome to my projects.")
+
+(<p>
+"This isn't exactly a blog; I'm not going to be chronicling my
+day-to-day life or anything like that. What it's for is talking about
+various projects I'm working on. Or have worked on. Or plan to work
+on. I may post occasional essays on various things too, indepent of
+any particular project."
+)
+
+(<p>
+"Lest anyone be misled by the title, this isn't about magic potions
+that let cars run on water, how to sharpen your razors by putting them
+in a pyramid, or cunning arrangements of crystals that let you tell
+the electric company you won't be needing their services. (Well, that
+last isn't quite true; I will get around to some solar-powered ideas,
+and solar panels are, in fact, cunning arrangements of silicon
+crystals that produce electricity...)"
+)
+
+(<a> #:href "/background/free_energy.html"
+     "Why I chose the title")
+
+(<p>
+"I'll be updating this welcome page periodically to point to what I'm
+working on at the moment; otherwise, my intent is to leave things
+alone once I've posted them. Mostly, anyway; I reserve the right to
+correct errors and add explanations. If I decide that something I've
+written is just totally messed up, well, I'll deal with that when it
+happens."
+)
+
+(<p>
+"I am, by profession, a computer programmer, and by avocation a science
+and engineering geek, so most of these projects will be making widgets
+of some kind, either hardware or software."
+)
+
+(<p>
+"I'm decent with hardware, but " (<em> "good") " at software, so that bias may
+show. I'm also a (not very active) ham radio operator, so there will
+be some radio stuff too."
+)
+
+(<a> #:href "/background/about_me.html" "More about me, for those who're interested")
+
+(<p> "To start with, I'm going to talk about two projects:")
+
+(<ul>
+ (<li>
+  (<a> #:href "/exploring_ror/toc.html"
+       "Exploring Ruby on Rails projects with metaprogramming"))
+ (<li>
+  (<a> #:href "/lc_calculator/overview.html"
+       "A JavaScript/React calculator for LC ladder filters")))

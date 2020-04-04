@@ -1,0 +1,31 @@
+(use html-tags)
+(set-title! "Background")
+(set-subtitle! "About Me")
+(add-tag! "background" 1)
+(set-up! "/index.html")
+
+(<p>
+"I'm a very experienced software developer; I've been doing it
+professionally for a long time, and for fun for even longer. For
+details of how that happened, look "
+(<a> #:href "how_i_started_with_computers.html" "here.")
+" I'm comfortable on the hardware side of things too, especially digital
+hardware."
+)
+
+(<p>
+"I have the mental tools and abstract knowledge to handle
+analog electronics, but I also have enough experience with engineering
+in general to understand that \"book learning\" is only half the
+battle. The other half is practical experience. I'm not without some
+experience in analog electronics, but I wouldn't even count myself as
+'pretty good', let alone expert."
+)
+
+(<p>
+"In particular, I don't have much experience at all with RF electonics
+(loosely, dealing with AC signals above 1 MHz). As someone with an
+amateur radio license, I'm slightly ashamed of this, so I plan to
+tackle some projects that will get me that experience. I know the
+theory, which will be a help."
+)
