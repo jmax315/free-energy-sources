@@ -1,6 +1,5 @@
-(use html-tags)
-
 (set-title! "Welcome")
+(set-up! #f)
 
 (<p> "Welcome to my projects.")
 
