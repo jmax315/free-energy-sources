@@ -1,8 +1,6 @@
-(use html-tags)
 (set-title! "Background")
 (set-subtitle! "About Me")
 (add-tag! "background" 1)
-(set-up! "/index.html")
 
 (<p>
 "I'm a very experienced software developer; I've been doing it

@@ -1,0 +1,8 @@
+(set-title! "")
+(set-subtitle! "Exploring Ruby on Rails Projects With Metaprogramming")
+(add-tag! "projects" 1)
+
+
+(<ul>
+ (<li> (<a> #:href "overview.html" "Overview"))
+ (<li> (<a> #:href "getting_started.html" "Getting Started")))

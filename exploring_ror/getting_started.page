@@ -1,0 +1,55 @@
+(set-title! "Exploring RoR Projects With Metaprogramming")
+(set-subtitle! "Getting Started")
+(add-tag! "exploring-rails-projects" 2)
+(set-up! "toc.html")
+(set-prev! "overview.html")
+
+
+(<h2> "Where To Start")
+
+(<p>
+"All good software starts the same way: bite off a manageable chunk
+and make it work. I find that it's best to have that chunk be a
+working application, however rudimentary. Starting with a working app
+helps avoid painting yourself into a corner with an unworkable
+design. You'll find out fast if you're headed that way, while the cost
+to correct it is lowest."
+)
+
+(<p>
+"For starters, let's say that I want to know all of the files loaded by
+a Rails project. This should be a fairly straightforward exercise,
+with plenty of room to add extra functionality once that's up and
+running."
+)
+
+(<p>
+"A bit of terminology here: when I want to talk about the code we're
+exploring, I'll use the adjective \"target\". So I might talk about the
+\"target application\", or \"target code\", for example."
+)
+
+(<p>
+"There's a bit of exploration to do here before I start on the app
+itself; the problem at hand is the basic question of how to intercept
+calls to Ruby's core methods. The terminology I like for this sort of
+exploration is taken from Extreme Programming (XP), and is \"spike\". A
+spike is just a bit of exploratory code. It is not production code,
+nor is it ever intended to be. Its sole purpose is to learn something."
+)
+
+(<p>
+"To begin with the smallest piece, I'll tackle the simple problem of
+noting every time that the target code calls " (<code>"require") ". I won't worry
+about calls to " (<code> "require_relative") " or " (<code>"load") "; if I can handle "
+(<code> "require") ", then I'm confident I can handle the other two."
+)
+
+(<p>
+"For target code, we'll use a simple \"hello, world\" program with one
+`require` at the top:"
+)
+
+#;(include-code "spikes/wrap_require/subject_app.rb"
+    #:git-repo "https://github.com/jmax315/rexp.git"
+    #:tag "spike-wrap-require")

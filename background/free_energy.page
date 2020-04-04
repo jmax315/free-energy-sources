@@ -1,8 +1,6 @@
-(use html-tags)
 (set-title! "Background")
 (set-subtitle! "Why Free Energy?")
 (add-tag! "background" 0)
-(set-up! "/index.html")
 
 (<p>
 "Why the site title, then, if I'm not trying to put the electric

@@ -1,8 +1,6 @@
-(use html-tags)
 (set-title! "Background")
 (set-subtitle! "How I Discovered Computers")
 (add-tag! "background" 2)
-(set-up! "/index.html")
 
 (<p>
 "I started out playing with electronics when I was a teenager.

@@ -1,0 +1,85 @@
+(set-title! "Exploring Rails Projects With Metaprogramming")
+(set-subtitle! "Overview")
+(add-tag! "exploring-rails-projects" 1)
+(set-up! "toc.html")
+(set-next! "getting_started.html")
+
+(<p>
+"In a perfect world, every project I worked on would be a completely
+green-field project, that I would know every detail about. At the very
+least, if there were some portion of it that I didn't know intimately,
+the person who did would be readily available for me to talk to
+whenever I needed to."
+)
+
+(<p>
+"Such, alas, is not the world we live in. Even in a new project where I
+have access to all the other team members, we're likely to be using
+code generators and third party libraries. And most programming work
+isn't green-field; it's usually stepping into an ongoing project to
+add features and fix bugs. Usually, some of the folks who've done
+previous work aren't available for consultation, either. Finally, much
+though it shames me to admit it, my memory is not perfect; sometimes I
+have to figure out my own code."
+)
+
+(<p>
+"So, a large part of my work involves understanding so-called legacy
+code. The tried and true method of this involves using IDEs and other
+code browsers, and relying on code conventions to let me quickly see
+what's going on."
+)
+
+(<p>
+"Ruby on Rails is both particularly good and particularly annoying in
+this respect. It's an opinionated framework, with a lot of conventions
+on how things are done, and for the most part, I agree with Rails'
+opinions. It's also benefited from the efforts of a lot of talented
+people, so Rails applications are built on a framework that starts
+better than average."
+)
+
+(<p>
+"Furthermore, the RubyGems library system makes it rather easy to add
+additional libraries; indeed, Rails itself is structured as a set of
+gems. If there's an existing gem to do something you need, it's
+usually easy to add it to a Rails application. Because of this, the
+'build it yourself' tendency that almost all developers have to some
+extent is somewhat muted."
+)
+
+(<p>
+"But Rails' strengths can also work against it. For example, not all
+gems are well written. In a less convenient ecosystem, a poorly
+written library would also be difficult to integrate. In Rails, it's
+usually pretty easy to add a new gem even if the gem's internal code
+quality is poor. In this situation, the problem won't show up until
+bugs start appearing that turn out to be due to the gem. By the time
+that happens, ripping out the offending gem usually takes a
+significant effort."
+)
+
+(<p>
+"Furthermore, one of the holes in the RubyGems system is that it's much
+easier to add a gem than it is to figure out whether an already
+included gem is actually necessary. It's common, in Rails projects
+that have been around for a while, for the list of gems to include
+some that aren't actually necessary."
+)
+
+(<p>
+"Ultimately, of course, these sorts of problems are the reason why
+skilled developers are necessary in the first place. But however
+skilled one may be, understanding a non-trivial application is a hard
+problem; we need every tool we can find to attack it."
+)
+
+(<p>
+"Most ways to understand legacy code are static analysis methods;
+essentially automated (or sometimes not so automated) versions of
+staring at the code. That's useful, but it's not the only way to
+attack the problem. I'm going to use another of Ruby's features, its
+support for metaprogramming, to attack the problem from a different
+angle.  Using metaprogramming, we can crawl inside a running app and
+watch what's going on."
+)
