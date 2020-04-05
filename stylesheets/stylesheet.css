@@ -70,14 +70,14 @@ html, body {
     text-indent: 2em;
 }
 
-#sidebar > .page-set-name {
+.sidebar-page-set-name {
     padding-top: 0.25em;
     padding-bottom: 0.125em;
     padding-left: 1em;
     font-weight: bold;
 }
 
-#sidebar > .page-set > .page {
+.sidebar-page-set-page {
     padding-bottom: 0.125em;
     padding-left: 1.5em;
     text-indent: -0.25em;
@@ -87,36 +87,21 @@ html, body {
     height: 2em;
 }
 
-#top-navigation>#prev {
-    position: absolute;
-    left: 5%;
-}
-
-#top-navigation>#up {
-    position: absolute;
-    left: 45%;
-}
-
-#top-navigation>#next {
-    position: absolute;
-    right: 5%;
-}
-
 #bottom-navigation {
     height: 2em;
 }
 
-#bottom-navigation>#prev {
+.navigation-prev {
     position: absolute;
     left: 5%;
 }
 
-#bottom-navigation>#up {
+.navigation-up {
     position: absolute;
     left: 45%;
 }
 
-#bottom-navigation>#next {
+.navigation-next {
     position: absolute;
     right: 5%;
 }

@@ -1,7 +1,6 @@
-(set-title! "")
-(set-subtitle! "Exploring Ruby on Rails Projects With Metaprogramming")
-(add-tag! "projects" 1)
-
+(set-title! "Exploring Ruby on Rails Projects With Metaprogramming")
+(set-subtitle! "Table of Contents")
+(add-tag! "projects" 1 #:index-name "Exploring Ruby on Rails Projects With Metaprogramming")
 
 (<ul>
  (<li> (<a> #:href "overview.html" "Overview"))

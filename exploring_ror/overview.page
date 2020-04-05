@@ -1,6 +1,6 @@
 (set-title! "Exploring Rails Projects With Metaprogramming")
 (set-subtitle! "Overview")
-(add-tag! "exploring-rails-projects" 1)
+(add-tag! "exploring-rails-projects-with-metaprogramming" 1)
 (set-up! "toc.html")
 (set-next! "getting_started.html")
 

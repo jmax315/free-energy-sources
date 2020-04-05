@@ -1,6 +1,6 @@
 (set-title! "Exploring RoR Projects With Metaprogramming")
 (set-subtitle! "Getting Started")
-(add-tag! "exploring-rails-projects" 2)
+(add-tag! "exploring-rails-projects-with-metaprogramming" 2)
 (set-up! "toc.html")
 (set-prev! "overview.html")
 
