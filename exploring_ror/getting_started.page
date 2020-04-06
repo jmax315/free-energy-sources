@@ -40,16 +40,18 @@ nor is it ever intended to be. Its sole purpose is to learn something."
 
 (<p>
 "To begin with the smallest piece, I'll tackle the simple problem of
-noting every time that the target code calls " (<code>"require") ". I won't worry
-about calls to " (<code> "require_relative") " or " (<code>"load") "; if I can handle "
-(<code> "require") ", then I'm confident I can handle the other two."
+noting every time that the target code calls " (<code>"require") ". I
+won't worry about calls to " (<code> "require_relative") "
+or " (<code>"load") "; if I can handle "
+(<code> "require") " in the spike, then I'm confident I can handle all
+three in the production code."
 )
 
 (<p>
-"For target code, we'll use a simple \"hello, world\" program with one
-`require` at the top:"
+"For target code, we'll use a simple \"hello, world\" program with one "
+(<code> "require") " at the top:"
 )
 
-#;(include-code "spikes/wrap_require/subject_app.rb"
-    #:git-repo "https://github.com/jmax315/rexp.git"
-    #:tag "spike-wrap-require")
+(<git-code> #:git-repo "https://github.com/jmax315/rexp.git"
+            #:commit-ish "spike-wrap-require"
+            #:file "spikes/wrap_require/subject_app.rb")
