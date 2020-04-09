@@ -2,6 +2,12 @@
 (set-subtitle! "Table of Contents")
 (add-tag! "projects" 1 #:index-name "Exploring Ruby on Rails Projects With Metaprogramming")
 
+(<p>
+ "The code for this project is available on "
+ (<a> #:href "https://github.com/jmax315/ruby-explorer.git"
+      "github")
+)
 (<ul>
  (<li> (<a> #:href "overview.html" "Overview"))
- (<li> (<a> #:href "getting_started.html" "Getting Started")))
+ (<li> (<a> #:href "getting_started.html" "Getting Started"))
+ (<li> (<a> #:href "creating_the_app.html" "Creating the App")))

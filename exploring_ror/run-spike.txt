@@ -1,0 +1,9 @@
+jmax@deepthought $ ruby -r ./wrap_require.rb subject_app.rb
+doing require(socket)
+doing require(socket.so)
+require(socket.so) returned true
+doing require(io/wait)
+require(io/wait) returned true
+require(socket) returned true
+In the subject app
+jmax@deepthought $

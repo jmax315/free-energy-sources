@@ -1,0 +1,22 @@
+jmax@deepthought $ rspec
+Resolving dependencies...
+F
+
+Failures:
+
+  1) The CLI creates the app
+     Failure/Error: load("bin/ruby-explorer")
+
+     LoadError:
+       cannot load such file -- /home/jmax/projects/ruby-explorer/src/ruby_explorer.rb
+     # ./spec/cli/cli_spec.rb:4:in `load'
+     # ./spec/cli/cli_spec.rb:4:in `block (2 levels) in <top (required)>'
+
+Finished in 0.00307 seconds (files took 0.1151 seconds to load)
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/cli/cli_spec.rb:7 # The CLI creates the app
+
+jmax@deepthought $

@@ -1,0 +1,179 @@
+(set-title! "Exploring Ruby on Rails Projects With Metaprogramming")
+(set-subtitle! "Creating the App")
+(add-tag! "exploring-rails-projects-with-metaprogramming" 3)
+(set-up! "toc.html")
+(set-prev! "getting_started.html")
+
+
+(<h2> "Setup")
+
+(<p>
+ "Before actually proceeding to that app code, there's some basic
+infrastructure to set up. I am a fan of " (<code> "rvm") " for keeping
+my projects isolated from one another, and of Bundler for explicitly
+managing Gem versions. So let's get them set up:"
+)
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/rvm-bundler-setup.txt")))
+
+(<p>
+ "So that's done. But this immediately brings up another issue. Lots
+of Rails projects are also going to be using " (<code> "rvm") " (or
+an " (<code> "rvm") "-compatible Ruby management package), and
+essentially " (<em> "all") " Rails projects are going to be using
+Bundler. We need to not interfere with either of those. So that goes
+on the "
+(<a> #:href "https://github.com/jmax315/ruby-explorer/wiki/Notes" "Notes")
+" page.")
+
+(<p>
+ "I strongly prefer to code in a test-driven fashion, writing the
+tests before the code (spikes are an exception, and that's one of the
+reasons for my \"spikes are not and will never be production code\"
+rule). My testing framework of choice is " (<code> "RSpec") ", so
+installing that's next:"
+)
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/rspec-setup.txt")))
+
+(<h3> "The CLI")
+
+(<p>
+ "As an architecture for applications in general, I prefer to have the
+top-level CLI wrapper just handle the command line arguments and options,
+create and configure an application object, then pass off control to
+it.")
+
+(<p>
+ "So, the first test is simply that the CLI creates an application object.
+I'm going to go through this first test in rather excruciating
+detail; I'll speed up the presentation after that, I promise."
+)
+
+(<git-code> #:git-repo  "https://github.com/jmax315/ruby-explorer.git"
+            #:commit-ish "first-spec"
+            #:file "spec/cli/cli_spec.rb")
+
+(<p>
+ "We fake running the script by calling " (<code> "load") ". Ruby, in
+fact, when run on a file, does load the file. There's also some setup
+to deal with the command line, but since we're not worrying about the
+command line yet, so the test doesn't bother with faking any of
+it. We'll have to deal with that in a few minutes, but for now, we can
+ignore the issue. Running the test, we get:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/running-first-test.txt")))
+
+(<p>
+ "The test fails. Perfectly reasonable, since we're trying to load
+a file that we haven't created yet. So, create the file
+bin/ruby-explorer:")
+
+(<git-code> #:git-repo  "https://github.com/jmax315/ruby-explorer.git"
+            #:commit-ish "first-spec"
+            #:file "bin/ruby-explorer")
+
+
+(<p>
+ "Running the test again:"
+ )
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/running-first-test-2.txt")))
+
+(<p>
+ "Progress! The test still fails. But the important point is that it
+fails " (<em> "differently.") " Before, we were failing because the
+CLI didn't exist. Now, we're failing because the app class doesn't exist.")
+
+(<p>
+ "The next thing to do, obviously, is create the app class, in
+src/ruby_explorer.rb:")
+
+(<git-code> #:git-repo  "https://github.com/jmax315/ruby-explorer.git"
+            #:commit-ish "first-spec"
+            #:file "src/ruby_explorer.rb")
+
+(<p>
+ "And our first test passes. Before leaving it, there's one more thing
+to check. A secondary purpose of the tests is to provide
+documentation, so before considering a test finished, let's like to run
+the test suite in verbose mode, to ensure that the test description is
+sensible. Running " (<code> "rspec -fd") ", we get:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/running-first-test-4.txt")))
+
+(<p>
+ "That looks pretty good, so this step is complete")
+
+(<p>
+ "There's a bunch more fiddly bits involved in testing the CLI, which
+I'm going to skip over here, because they aren't directly related to
+the topic at hand (snooping on a Rails app). I do think the details of
+the CLI testing are interesting enough to warrant a detailed post,
+just not here. I'm adding that to my list of topics on deck. Watch
+that space if you want details."  )
+
+(<p>
+"When all was said and done, the stub app class ended up like this:" )
+
+(<git-code> #:git-repo  "https://github.com/jmax315/ruby-explorer.git"
+            #:commit-ish "finished-basic-cli"
+            #:file "src/ruby_explorer.rb")
+
+(<p>
+ "With this for the CLI itself:"
+ )
+
+(<git-code> #:git-repo  "https://github.com/jmax315/ruby-explorer.git"
+            #:commit-ish "finished-basic-cli"
+            #:file "bin/ruby-explorer")
+
+(<p>
+ "The CLI checks the command line for " (<em> "syntactic") " validity;
+i.e. does the command line contain valid options and only one target
+directory. (Right now, there's only one valid option, -h (or --help),
+but I expect this will change.) Assuming that the command line is
+syntactically valid, the CLI creates the application object, sets
+its " (<code> "target_directory") " property, and calls
+its " (<code> "run") " method. " (<em> "Semantic") " validity
+checking (checking whether the target directory actually exists, is a
+Rails project, and so on) is the application object's
+responsibility.")
+
+(<p>
+ "I expect that the CLI won't change much during subsequent
+development. Changes should be just adding new options and passing
+their values through to the application object."
+)
+
+(<p>
+ "If I do decide to eventually create a really sophisticated CLI, then
+I'll probably resort to something like the " (<code> "thor") " gem,
+which handles most of the boilerplate for such things. Right now, I'm
+not feeling the urge to get too fancy, and if I do later, having most
+of the application logic in the " (<code> "RubyExplorer") " class
+should help keep things decoupled enough to make upgrading the user
+interface fairly straightforward.")
+
+(<p>
+ "The test code for the CLI was actually the most complicated part:"
+ )
+
+(<git-code> #:git-repo  "https://github.com/jmax315/ruby-explorer.git"
+            #:commit-ish "finished-basic-cli"
+            #:file "spec/cli/cli_spec.rb")

@@ -1,0 +1,52 @@
+(set-title! "An LC Ladder Filter Calculator")
+(set-subtitle! "Overview")
+
+(<p>
+ "There's a kind of electronic circuit know as a filter, whose purpose
+is to allow only certain frequencies through. If you've ever used an
+old-school graphic equalizer on a sound system, or even bass and
+treble knobs, you've been adjusting a filter circuit."
+)
+
+
+(<p>
+"There are approximately a gazillion (plus minus a bazillion)
+different kinds of filter circuits, but I'm particularly interested in
+a specific kind of filter, known as an LC Ladder filter, for some of
+the radio projects I'm noodling around with (None of them have come far
+enough to be worth putting up on this site yet)."
+)
+
+(<p>
+ "The calculations involved in designing such a filter circuit are
+onerous enough that I don't want to do them by hand, but they really
+aren't all that much for a computer to do. There's a variety of online
+calculators for them out there, but none of them
+is " (<em> "exactly") " what I want.")
+
+(<p>
+ "As I said, there isn't all that much arithmetic involved, for a
+computer, but there are a bunch of parameters to twiddle. All of this
+makes an in-browser calculator a nice fit for the problem. Because
+it's in the browser, that makes the language choice simple:
+JavaScript."
+)
+
+(<p>
+ "A raw JavaScript application, however, can drive you crazy. It's
+pretty easy to do simple things, but as you start adding features, you
+quickly hit a threshold where the code has a tendency to become
+overwhelming. And you generally hit that threshold without much warning."
+ )
+
+(<p>
+ "To deal with the complexity problem, people have been creating
+application frameworks for in-browser JavaScript for some time. Of the
+current crop of frameworks, I prefer React."
+ )
+
+(<p>
+ "So, that's the short-form description of the project: An in-browser
+calculator, written in JavaScript/React, for designing LC ladder
+filters."
+)

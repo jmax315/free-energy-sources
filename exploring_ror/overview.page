@@ -25,7 +25,7 @@ have to figure out my own code."
 
 (<p>
 "So, a large part of my work involves understanding so-called legacy
-code. The tried and true method of this involves using IDEs and other
+code. The tried and true method of this involves using an IDE or other
 code browsers, and relying on code conventions to let me quickly see
 what's going on."
 )
@@ -82,4 +82,9 @@ attack the problem. I'm going to use another of Ruby's features, its
 support for metaprogramming, to attack the problem from a different
 angle.  Using metaprogramming, we can crawl inside a running app and
 watch what's going on."
+)
+
+(<p>
+ "The code for this project is available at "
+ (<a> #:href "https://github.com/jmax315/ruby-explorer.git")
 )

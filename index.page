@@ -4,12 +4,10 @@
 (<p> "Welcome to my projects.")
 
 (<p>
-"This isn't exactly a blog; I'm not going to be chronicling my
-day-to-day life or anything like that. What it's for is talking about
-various projects I'm working on. Or have worked on. Or plan to work
-on. I may post occasional essays on various things too, indepent of
-any particular project."
-)
+"This site is for for is talking about various projects I'm working
+on. Or have worked on. Or plan to work on. I may post occasional
+essays on various things too, independent of any particular project, but
+mostly, it's projects."  )
 
 (<p>
 "Lest anyone be misled by the title, this isn't about magic potions
@@ -26,11 +24,7 @@ crystals that produce electricity...)"
 
 (<p>
 "I'll be updating this welcome page periodically to point to what I'm
-working on at the moment; otherwise, my intent is to leave things
-alone once I've posted them. Mostly, anyway; I reserve the right to
-correct errors and add explanations. If I decide that something I've
-written is just totally messed up, well, I'll deal with that when it
-happens."
+working on at the moment."
 )
 
 (<p>
@@ -47,12 +41,47 @@ be some radio stuff too."
 
 (<a> #:href "/background/about_me.html" "More about me, for those who're interested")
 
-(<p> "To start with, I'm going to talk about two projects:")
+(<p>
+"For a first project, I'm going to talk about using some clever Ruby
+tricks to have a look inside Ruby on Rails:"
+)
 
+(<p>
+ "In the near future, I'll be looking at a much less ambitious
+project: A calculator for designing some specific electronic circuits,
+implemented in React and running entirely in the browser. I'll
+probably also get around to discussing how this site is built, at some
+point." )
+
+
+
+(<h3> "Comments and Feedback")
+
+(<p>
+ "I don't have a comments section on here, because I haven't found a
+comment engine that I'm really happy with. Most of them seem to assume
+you're running a WordPress site, which I'm not. I'll keep poking at
+that issue; I'd like to have comments."
+ )
+
+(<p>
+"In the meantime, you can reach me as jmax315, on gmail. That isn't
+my primary address, but it does forward to it. (Gmail does a decent
+job of spam filtering, which is why that's the address I'm putting out
+here.)"
+)
+
+(<h3> "Projects in Progress")
 (<ul>
  (<li>
   (<a> #:href "/exploring_ror/toc.html"
-       "Exploring Ruby on Rails projects with metaprogramming"))
+       "Exploring Ruby on Rails projects with metaprogramming")))
+
+(<h3> "Projects on Deck")
+(<ul>
  (<li>
   (<a> #:href "/lc_calculator/overview.html"
-       "A JavaScript/React calculator for LC ladder filters")))
+       "A JavaScript/React calculator for LC ladder filters"))
+ (<li> "How this site is built")
+ (<li> "Testing Ruby command-line programs with RSpec"))
+
