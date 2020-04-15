@@ -1,5 +1,6 @@
 (set-title! "An LC Ladder Filter Calculator")
 (set-subtitle! "Overview")
+(add-tag! "an_lc_ladder_filter_calculator" 1)
 
 (<p>
  "There's a kind of electronic circuit know as a filter, whose purpose
@@ -7,7 +8,6 @@ is to allow only certain frequencies through. If you've ever used an
 old-school graphic equalizer on a sound system, or even bass and
 treble knobs, you've been adjusting a filter circuit."
 )
-
 
 (<p>
 "There are approximately a gazillion (plus minus a bazillion)

@@ -1,0 +1,66 @@
+(set-title! "Exploring Ruby on Rails Projects With Metaprogramming")
+(set-subtitle! "Better Monkey Patching")
+(add-tag! "exploring-rails-projects-with-metaprogramming" 2)
+(set-up! "toc.html")
+(set-prev! "getting_started.html")
+(set-next! "creating_the_app.html")
+
+(<h2> "A Better Spy")
+
+(<p>
+ "Our first spike works fine, and actually would be good enough to
+start with, but I don't like it, on a couple fronts.")
+
+(<p>
+"First, we have no good way to respect one of our notes: 'Make sure
+the name(s) of the new methods don't collide with existing methods.'
+There are enough hooks in Ruby that we could scan existing method
+names and pick a unique one, but that wouldn't protect us from that
+name being taken by someone else " (<em> "later."))
+
+(<p>
+ "Second, with we're tied to Kernel. This isn't an immediate problem,
+because we're only wrapping " (<code> "Kernel::require") ", but our
+approach doesn't scale well, if we ever want to wrap a method in some
+other module or class.")
+
+(<h3> "Spike")
+
+(<p>
+"So let's see if we can do better. It turns out that Ruby provides
+enough hooks that we can.")
+
+(<git-code> #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+            #:commit-ish "spike-wrap-require-nicely"
+            #:file "spikes/dynamic_wrap_require/wrap_require.rb")
+
+(<p>
+"We define a new method, " (<code> "wrap") ", which takes a class and a method id (a keyword).
+(It's a Ruby convention to use the name " (<code> "klass") " when
+defining a variable which you'd really like to
+call " (<code> "class") ".)  The first thing it does is
+call " (<code> "method") " on the passed-in class to grab a copy of
+the method we're going to wrap.  Then it
+calls " (<code> "define_method") " to create our wrapped version. The
+block passed in to " (<code> "define-method") " becomes the code for
+our wrapper.")
+
+(<p> "Finally, we use our new method to wrap Kernel#require.")
+
+(<p> "Using the same target app as our first spike, when we run the new version of our wrapping code, we get the same result:")
+
+(<pre>
+ (<code> #:class "shell"
+  (<include> "exploring_ror/run-second-spike.txt")))
+
+(<p>
+ "This nicely clears up both issues; by using " (<code> "method") "
+and " (<code> "define_method") ", instead
+of " (<code> "alias_method") ", we aren't adding any new method
+definitions to the target class, and we also can pass any class we
+like in to " (<code> "wrap") ".")
+
+(<p>
+ "The code for this spike is in the "
+ (<a> #:href "https://github.com/jmax315/ruby-explorer" "git repo")
+ ", under \"spikes/dynamic_wrap_require\".")

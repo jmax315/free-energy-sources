@@ -1,6 +1,7 @@
 (set-title! "Exploring Rails Projects With Metaprogramming")
 (set-subtitle! "Overview")
 (add-tag! "exploring-rails-projects-with-metaprogramming" 1)
+(set-prev! "toc.html")
 (set-up! "toc.html")
 (set-next! "getting_started.html")
 
@@ -78,13 +79,20 @@ problem; we need every tool we can find to attack it."
 "Most ways to understand legacy code are static analysis methods;
 essentially automated (or sometimes not so automated) versions of
 staring at the code. That's useful, but it's not the only way to
-attack the problem. I'm going to use another of Ruby's features, its
-support for metaprogramming, to attack the problem from a different
-angle.  Using metaprogramming, we can crawl inside a running app and
-watch what's going on."
+attack the problem."
 )
 
 (<p>
- "The code for this project is available at "
- (<a> #:href "https://github.com/jmax315/ruby-explorer.git")
+"I'm going to use another of Ruby's features, its support for
+metaprogramming, to attack the problem from a different angle.  Using
+metaprogramming, we can crawl inside a running app and watch what's
+going on. I've done this before, on an ad-hoc basis
+using " (<code> "irb") " and " (<code> "pry") " (both of which I
+unconditionally recommend), but this project is about building a
+reusable tool."
 )
+
+(<p>
+ "The code for this project is available "
+ (<a> #:href "https://github.com/jmax315/ruby-explorer.git"
+      "on Github"))

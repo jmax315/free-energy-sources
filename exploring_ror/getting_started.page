@@ -3,7 +3,7 @@
 (add-tag! "exploring-rails-projects-with-metaprogramming" 2)
 (set-up! "toc.html")
 (set-prev! "overview.html")
-(set-next! "creating_the_app.html")
+(set-next! "better_monkey_patching.html")
 
 (<h2> "Where To Start")
 
@@ -157,12 +157,10 @@ avoid polluting the target's output."
  )
 
 (<p>
- "The other two, though, are somewhat unavoidable. By the very nature
+ "The second somewhat unavoidable. By the very nature
 of metaprogramming, we're going to be executing some extra code; all
-we can do is keep the overhead as low as possible.  Also,
-unfortunately, Ruby doesn't give us a way to avoid injecting extra
-names when we wrap a method. The worst case scenario would be stepping
-on an existing method; we need to make some effort to avoid that."
+we can do is keep the overhead as low as possible. We'll deal with the third item, not polluting the target code's name space, next.
+"
  )
 
 (<p>
@@ -170,10 +168,9 @@ on an existing method; we need to make some effort to avoid that."
  )
 
 (<ul>
- (<li> "Wrap existing methods using " (<code> "alias_method"))
+ (<li> "We can wrap existing methods.")
  (<li> "Don't touch target's output")
- (<li> "Minimize the amount of code injected")
- (<li> "Make sure the name(s) of new methods don't collide with existing methods"))
+ (<li> "Minimize the amount of code injected"))
 
 (<p>
 "I'll record these items in the project's Github wiki on a "

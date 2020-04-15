@@ -1,8 +1,8 @@
 (set-title! "Exploring Ruby on Rails Projects With Metaprogramming")
 (set-subtitle! "Creating the App")
-(add-tag! "exploring-rails-projects-with-metaprogramming" 3)
+(add-tag! "exploring-rails-projects-with-metaprogramming" 4)
 (set-up! "toc.html")
-(set-prev! "getting_started.html")
+(set-prev! "better_monkey_patching.html")
 
 
 (<h2> "Setup")
@@ -45,7 +45,7 @@ installing that's next:"
 (<h3> "The CLI")
 
 (<p>
- "As an architecture for applications in general, I prefer to have the
+ "As an architecture for applications in general, it's best to have the
 top-level CLI wrapper just handle the command line arguments and options,
 create and configure an application object, then pass off control to
 it.")
@@ -123,7 +123,7 @@ sensible. Running " (<code> "rspec -fd") ", we get:")
 (<p>
  "There's a bunch more fiddly bits involved in testing the CLI, which
 I'm going to skip over here, because they aren't directly related to
-the topic at hand (snooping on a Rails app). I do think the details of
+the topic at hand (snooping on a Rails app). The details of
 the CLI testing are interesting enough to warrant a detailed post,
 just not here. I'm adding that to my list of topics on deck. Watch
 that space if you want details."  )
@@ -147,7 +147,7 @@ that space if you want details."  )
  "The CLI checks the command line for " (<em> "syntactic") " validity;
 i.e. does the command line contain valid options and only one target
 directory. (Right now, there's only one valid option, -h (or --help),
-but I expect this will change.) Assuming that the command line is
+but this will likely change.) Assuming that the command line is
 syntactically valid, the CLI creates the application object, sets
 its " (<code> "target_directory") " property, and calls
 its " (<code> "run") " method. " (<em> "Semantic") " validity
@@ -156,19 +156,20 @@ Rails project, and so on) is the application object's
 responsibility.")
 
 (<p>
- "I expect that the CLI won't change much during subsequent
+ "The CLI shouldn't change much during subsequent
 development. Changes should be just adding new options and passing
 their values through to the application object."
 )
 
 (<p>
- "If I do decide to eventually create a really sophisticated CLI, then
-I'll probably resort to something like the " (<code> "thor") " gem,
-which handles most of the boilerplate for such things. Right now, I'm
-not feeling the urge to get too fancy, and if I do later, having most
-of the application logic in the " (<code> "RubyExplorer") " class
-should help keep things decoupled enough to make upgrading the user
-interface fairly straightforward.")
+ "If we do decide to eventually create a really sophisticated CLI,
+then it would be best to use something like the " (<code> "thor")
+" gem, which handles most of the boilerplate for such things. The
+other plausible paths that we might take are to create a GUI, or a web
+front end.  Right now, there's no need to get too fancy, and whatever
+we do later, having most of the logic outside of the actual CLI should
+help keep things decoupled enough to make upgrading the user interface
+fairly straightforward.")
 
 (<p>
  "The test code for the CLI was actually the most complicated part:"
