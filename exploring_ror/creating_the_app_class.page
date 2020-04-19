@@ -1,0 +1,314 @@
+(set-title! "Exploring Ruby on Rails Projects With Metaprogramming")
+(set-subtitle! "Creating the App Object")
+(add-tag! "exploring-rails-projects-with-metaprogramming" 5)
+(set-up! "toc.html")
+(set-prev! "creating_the_app.html")
+(set-next! "creating_the_probe.html")
+
+
+(<h2> "The Application Class")
+
+(<p>
+ "We had to create the skeleton of an application
+object, " (<code> "RubyExplorer") ", in order to have something to
+attach the CLI to. Now it's time to put some flesh on that skeleton's
+bones.")
+
+(<p>
+ "So, what does the application object have to do? It needs to:")
+
+(<ul>
+ (<li> "Insert the code to monkey-patch " (<code> "require") " into the target Rails app")
+ (<li> "Start the target Rails app")
+ (<li> "Display the output from our version of " (<code> "require")))
+
+(<p>
+ "In addition, when we start the target Rails app, we need to respect
+the app's (possible) use of rvm, and its (likely) use of bundler.")
+
+(<p>
+ "Another bit of terminology again: In hardware development, one uses
+a probe from a test instrument (e.g., an voltmeter) to connect to the
+circuit under development and look at what's going on. By analogy, I'm
+going to refer to the code inserted into the target Rails app as
+the " (<em> "probe") "."  )
+
+(<p>
+ "We can insert our probe into the target application in the same way
+that our spikes did, using Ruby's " (<code> "-r") " option. Respecting
+bundler should happen automatically, as long as we don't do anything
+to mess that up.  Respecting rvm is slightly trickier.")
+
+(<p>
+ "Rvm and similar packages work their magic by hooks in bash that are
+installed when the user logs in. We can fake a login shell by using
+bash's " (<code> "-l") " option, but that leaves us with a quandary: We
+want to load up the application using " (<code> "ruby -r") ", but at
+the same time we want to use " (<code> "bash -l") " to make sure we
+let rvm insert itself. Fortunately, bash also provides an option that
+gets us out of the dillema:" (<code> "-c") "."  )
+
+(<p>
+ "When run with " (<code> "-c") ", bash doesn't read commands from the
+user, as it normally would. Instead, it expects a single command to be
+provided as a command line argument.  It starts up, runs the specified
+command, and then exits. Putting all of this together (and ignoring,
+for the moment, the issue of what directory our probe code is in
+versus what directory the target app is in; we'll deal with that in a
+bit) we can accomplish what we want if we start up the app like:" )
+
+(<pre>
+ (<code>
+  "bash -l -c 'ruby -r probe.rb bin/rails'" ))
+
+(<p>
+ "So let's write our first test for " (<code> "RubyApplication") ":")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "first-run-version"
+ #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<p> "And the code to make it pass is:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "first-run-version" #:file "src/ruby_explorer.rb")
+
+(<p>
+ "As I mentioned, we've entirely neglected the issue of directories
+for ruby-explorer and the target app here. In addition, although we've
+got a unit test in place to ensure that we're doing what we want to,
+but we don't have any assurance that it all works. To get that
+confidence, we have to actually run the application."  )
+
+(<p>
+ "To run the application, we need a Rails app to be our
+target. Eventually, we want to run this on a \"legacy\" app - one
+that's already been written to do something. After all, that's
+ultimately the point. For now, though, all we want is to ensure that
+we start the target app, so we can just create a new rails app and use
+that for our target app.")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/create-bare-rails.txt")))
+
+(<p>
+ "So now we have a target app. When we try running with ruby-explorer,
+it fails, of course."  )
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/first-failed-run.txt")))
+
+(<p>
+ "Wups! Our CLI doesn't have execute permission. This is simple enough
+to fix; we flip the execution permission bit on the CLI and try
+again."  )
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/second-failed-run.txt")))
+
+(<p>
+ "And it fails in a much more reasonable fashion. We're looking
+for " (<code> "bin/rails") " under the root directory of
+ruby-explorer, and of course it isn't there; it's in the target app's
+directory."  )
+
+(<p>
+ "To fix this, we have to change to the target app's directory. We
+already know what that directory is; our CLI stashed it in "
+(<code> "RubyExplorer#target_directory") ". Time for another test:" )
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "chdir-to-target"
+ #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<p> "And the code to make it pass is:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "chdir-to-target"
+ #:file "src/ruby_explorer.rb")
+
+(<p> "Running it, we fail again.")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/third-failed-run.txt")))
+
+(<p>
+ "This time, we failed because Ruby can't find our probe. We've got
+several problems here. First, we haven't even created a probe. Second,
+when we do, it'll be back in ruby-explorer's directory. Third, back
+when we set up the test for ruby-explorer's call
+to " (<code> "spawn") ", we forgot to include the .rb extension on the
+probe."  )
+
+(<p>
+ "Fixing these problems in the test, we get:" )
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "fix-spawn" #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<p>
+ "And then we change the code so the test passes."  )
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "fix-spawn" #:file "src/ruby_explorer.rb")
+
+(<p>
+ "Let's add a dummy Probe class, so we have something to load:" )
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "fix-spawn" #:file "src/probe.rb")
+
+(<p> "And we're ready to try again:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/fourth-failed-run.txt")))
+
+(<p>
+ "So close. The only reason we failed this time is that we didn't tell
+rails to start a server; in fact we didn't tell it to do anything.
+Fixing the test and code again:" )
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "first-rails-run"
+ #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "first-rails-run" #:file "src/ruby_explorer.rb")
+
+(<p> "Crossing our fingers, we try running it again:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/successful-run.txt")))
+
+(<p> "Success!")
+
+(<p>
+ "After dancing in joy for a bit, we realize that we still have an
+empty probe. We really aren't doing anything more than running Rails
+in an unusual fashion. In fact, we don't even have any feedback to
+tell us our probe is getting loaded. We'll tackle putting some real
+guts into the probe shortly, but first lets just print something from
+inside the probe."  )
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "hello-probe"
+ #:file "src/probe.rb")
+
+(<p> "Running it again, we see our message:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/hello-probe.txt")))
+
+(<p>
+ "Before we start work on the probe in the next section, let's clean
+up the tests a bit. We should always keep our code, which includes the
+code for tests, as clean as possible.  There's actually not much to
+criticize in the RubyExplorer class, but we've got a little bit of a
+smell in our tests for it:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "hello-probe"
+ #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<p>
+ "We're actually testing three different things at once.")
+
+(<ul>
+ (<li> "First, we test that we change to the correct (i.e. the target) directory")
+
+ (<li> "Second we test that we spawn the Rails app correctly")
+
+ (<li> "Finally, we also test that we do things in the correct order; that
+is, we must change to the target directory before trying
+to start up the target app."))
+
+(<p>
+ "The first two are checked by having " (<code> ".with") " clauses on
+the " (<code> "expect") " statements, which check the arguments
+passed.  The third thing is checked by the "(<code> ".ordered") "
+clauses, which check that the calls happen in the same order as
+the " (<code> "expect") " statements.")
+
+(<p> "It's also a little annoying that we have two separate
+expectations in our test; ideally, each test should check for one and
+only one thing, so that if it fails, we can easily determine what's
+wrong.")
+
+(<p> "At this point, things are not awful, but it's best to clean them
+up " (<em> "now") ", before they get any worse. So, splitting our
+existing test into three tests, we get:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "refactor-ruby-explorer-test"
+ #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<p>
+ "Looking at that, we've still got one more problem with our app
+class. We're assuming that the current directory is the root of the
+ruby-explorer project, which won't generally be true. So lets' modify
+the tests to remove that assumption. This is actually slightly
+tricky."
+ )
+
+(<p>
+ "At first glance, we might try picking the directory for the "
+ (<code> "ruby-explorer") " binary off of " (<code> "$0") ". This
+won't work, though, because at the time when we need the directory
+for " (<code> "probe.rb") ", we won't be in our original location; we
+will have changed directories to the target project.")
+
+(<p> "Or, rather, it won't " (<em> "always") " work. It will work if
+the original command to run ruby-explorer used an absolute path, for
+example: " (<code> "/home/jmax/ruby-explorer/bin/ruby-explorer") ". This
+gives our way to resolve the problem: before we change to the target
+project's directory, we need to get the directory part
+of " (<code> "$0") " and convert it to an absolute path. So the test
+ends up like:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "run-anywhere"
+ #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<p> "And the code changes to:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "run-anywhere"
+ #:file "src/ruby_explorer.rb")
+
+(<p>
+ "Trying all this out, we cd up a level and run " (<code> "ruby-explorer") ":")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_app_class.files/run-up-one.txt")))
+
+(<p> "On to the probe!")

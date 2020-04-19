@@ -11,4 +11,5 @@
  (<li> (<a> #:href "overview.html" "Overview"))
  (<li> (<a> #:href "getting_started.html" "Getting Started"))
  (<li> (<a> #:href "better_monkey_patching.html" "Better Monkey Patching"))
- (<li> (<a> #:href "creating_the_app.html" "Creating the App")))
+ (<li> (<a> #:href "creating_the_app.html" "Creating the App"))
+ (<li> (<a> #:href "creating_the_app_class.html" "Creating the App Class")))

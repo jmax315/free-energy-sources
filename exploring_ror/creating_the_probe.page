@@ -1,0 +1,10 @@
+(set-title! "Exploring Ruby on Rails Projects With Metaprogramming")
+(set-subtitle! "Creating the Probe")
+(add-tag! "exploring-rails-projects-with-metaprogramming" 6)
+(set-up! "toc.html")
+(set-prev! "creating_the_app_class.html")
+
+
+(<h2> "The Probe Class")
+
+(<p> "Coming soon")

@@ -1,5 +1,6 @@
 (set-title! "Welcome")
 (set-up! #f)
+(set-subtitle! "About this site")
 
 (<p> "Welcome to my projects.")
 

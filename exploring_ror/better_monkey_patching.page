@@ -19,10 +19,12 @@ names and pick a unique one, but that wouldn't protect us from that
 name being taken by someone else " (<em> "later."))
 
 (<p>
- "Second, with we're tied to Kernel. This isn't an immediate problem,
+ "Second, we're tied to Kernel. This isn't an immediate problem,
 because we're only wrapping " (<code> "Kernel::require") ", but our
-approach doesn't scale well, if we ever want to wrap a method in some
-other module or class.")
+approach doesn't scale well. If we ever want to wrap a method in some
+other module or class, we'll need to open up that module or method as
+well. Our current approach gives us no good way to do that on the fly,
+either; we'd have to modify the wrapping code.")
 
 (<h3> "Spike")
 
@@ -47,11 +49,12 @@ our wrapper.")
 
 (<p> "Finally, we use our new method to wrap Kernel#require.")
 
-(<p> "Using the same target app as our first spike, when we run the new version of our wrapping code, we get the same result:")
+(<p> "Using the same target app as our first spike, when we run the
+new version of our wrapping code, we get the same result:")
 
 (<pre>
  (<code> #:class "shell"
-  (<include> "exploring_ror/run-second-spike.txt")))
+  (<include> "exploring_ror/better_monkey_patching.files/run-second-spike.txt")))
 
 (<p>
  "This nicely clears up both issues; by using " (<code> "method") "
@@ -63,4 +66,4 @@ like in to " (<code> "wrap") ".")
 (<p>
  "The code for this spike is in the "
  (<a> #:href "https://github.com/jmax315/ruby-explorer" "git repo")
- ", under \"spikes/dynamic_wrap_require\".")
+ ", under " (<code> "spikes/dynamic_wrap_require") ".")

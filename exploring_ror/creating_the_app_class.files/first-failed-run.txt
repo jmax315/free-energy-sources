@@ -1,0 +1,3 @@
+jmax@deepthought $ bin/ruby-explorer ../bare-rails
+bash: bin/ruby-explorer: Permission denied
+jmax@deepthought $

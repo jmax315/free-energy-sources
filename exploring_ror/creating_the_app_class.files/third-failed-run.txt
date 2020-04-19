@@ -1,0 +1,6 @@
+jmax@deepthought $ bin/ruby-explorer ../bare-rails
+jmax@deepthought $ Traceback (most recent call last):
+    1: from /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+/home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/rubygems/core_ext/kernel_require.rb:54:in `require': cannot load such file -- probe (LoadError)
+
+jmax@deepthought $

@@ -1,0 +1,36 @@
+jmax@deepthought $ rvm use 2.5.5@bare-rails --create
+ruby-2.5.5 - #gemset created /home/jmax/.rvm/gems/ruby-2.5.5@bare-rails
+ruby-2.5.5 - #generating bare-rails wrappers.........
+Using /home/jmax/.rvm/gems/ruby-2.5.5 with gemset bare-rails
+jmax@deepthought $ rails new bare-rails
+      create
+      create  README.md
+      create  Rakefile
+      create  .ruby-version
+   :
+   :
+jmax@deepthought $ cd bare-rails/
+jmax@deepthought $ echo >.ruby-version ruby-2.5.5
+jmax@deepthought $ echo >.gemset-version bare-rails
+jmax@deepthought $ bundle install
+Fetching gem metadata from https://rubygems.org/............
+Fetching rake 13.0.1
+Installing rake 13.0.1
+   :
+   :
+jmax@deepthought $ bin/rails server
+=> Booting Puma
+=> Rails 6.0.2.2 application starting in development
+=> Run `rails server --help` for more startup options
+Puma starting in single mode...
+* Version 4.3.3 (ruby 2.5.5-p157), codename: Mysterious Traveller
+* Min threads: 5, max threads: 5
+* Environment: development
+* Listening on tcp://127.0.0.1:3000
+* Listening on tcp://[::1]:3000
+Use Ctrl-C to stop
+Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2020-04-17 18:54:36 -0400 ===
+- Goodbye!
+Exiting
+jmax@deepthought $

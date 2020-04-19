@@ -112,9 +112,9 @@ value."
  )
 
 (<p>
-"The code for the initial spike is checked in under the directory
-\"spikes/wrap-require\"."
-)
+ "The code for the initial spike is checked in under the directory "
+ (<code> "spikes/wrap-require.")
+ )
 
 (<p>
  "We can use Ruby's -r option to force it to load our inspection code
@@ -124,7 +124,7 @@ all this out, it looks like:" )
 
 (<pre>
  (<code> #:class "shell"
-  (<include> "exploring_ror/run-spike.txt")))
+  (<include> "exploring_ror/getting_started.files/run-spike.txt")))
 
 (<p>
  "And we've already uncovered something interesting. The target's
@@ -159,12 +159,13 @@ avoid polluting the target's output."
 (<p>
  "The second somewhat unavoidable. By the very nature
 of metaprogramming, we're going to be executing some extra code; all
-we can do is keep the overhead as low as possible. We'll deal with the third item, not polluting the target code's name space, next.
-"
+we can do is keep the overhead as low as possible.")
+
+(<p> "We'll deal with the third item, not polluting the target code's name space, next."
  )
 
 (<p>
- "So, summarizing what we've learned from our spike, there are four points:"
+ "Summarizing what we've learned from our spike, there are four points:"
  )
 
 (<ul>

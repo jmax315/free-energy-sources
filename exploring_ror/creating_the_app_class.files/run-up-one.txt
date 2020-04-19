@@ -1,0 +1,13 @@
+jmax@deepthought $ cd ..
+jmax@deepthought $ ruby-explorer/bin/ruby-explorer bare-rails
+jmax@deepthought $ Hello from the probe!
+=> Booting Puma
+=> Rails 6.0.2.2 application starting in development
+=> Run `rails server --help` for more startup options
+Puma starting in single mode...
+* Version 4.3.3 (ruby 2.5.5-p157), codename: Mysterious Traveller
+* Min threads: 5, max threads: 5
+* Environment: development
+* Listening on tcp://127.0.0.1:3000
+* Listening on tcp://[::1]:3000
+Use Ctrl-C to stop
