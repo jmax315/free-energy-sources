@@ -8,6 +8,8 @@
 
 (<h2> "The Application Class")
 
+(<h3> "Overview")
+
 (<p>
  "We had to create the skeleton of an application
 object, " (<code> "RubyExplorer") ", in order to have something to
@@ -25,6 +27,9 @@ bones.")
 (<p>
  "In addition, when we start the target Rails app, we need to respect
 the app's (possible) use of rvm, and its (likely) use of bundler.")
+
+
+(<h3> "Inserting the Probe")
 
 (<p>
  "Another bit of terminology again: In hardware development, one uses
@@ -74,6 +79,8 @@ bit) we can accomplish what we want if we start up the app like:" )
 (<git-code>
  #:git-repo "https://github.com/jmax315/ruby-explorer.git"
  #:commit-ish "first-run-version" #:file "src/ruby_explorer.rb")
+
+(<h3> "Keeping Track of Where We Are")
 
 (<p>
  "As I mentioned, we've entirely neglected the issue of directories
@@ -203,6 +210,8 @@ Fixing the test and code again:" )
 
 (<p> "Success!")
 
+(<h3> "Feedback and Cleanup")
+
 (<p>
  "After dancing in joy for a bit, we realize that we still have an
 empty probe. We really aren't doing anything more than running Rails
@@ -267,6 +276,8 @@ existing test into three tests, we get:")
  #:git-repo "https://github.com/jmax315/ruby-explorer.git"
  #:commit-ish "refactor-ruby-explorer-test"
  #:file "spec/unit/ruby_explorer_spec.rb")
+
+(<h3> "Keeping Better Track of Where We Are")
 
 (<p>
  "Looking at that, we've still got one more problem with our app

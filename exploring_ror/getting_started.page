@@ -46,7 +46,7 @@ exploring, I'll use the adjective \"target\". So I might talk about the
 \"target application\", or \"target code\", for example."
  )
 
-(<h3> "A Spike")
+(<h3> "Figuring Out the Clever Bit: A Spike")
 
 (<p>
  "There's a bit of exploration to do here before I start on the app
@@ -165,7 +165,7 @@ we can do is keep the overhead as low as possible.")
  )
 
 (<p>
- "Summarizing what we've learned from our spike, there are four points:"
+ "Summarizing what we've learned from our spike, there are three points:"
  )
 
 (<ul>

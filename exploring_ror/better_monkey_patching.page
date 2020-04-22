@@ -26,8 +26,6 @@ other module or class, we'll need to open up that module or method as
 well. Our current approach gives us no good way to do that on the fly,
 either; we'd have to modify the wrapping code.")
 
-(<h3> "Spike")
-
 (<p>
 "So let's see if we can do better. It turns out that Ruby provides
 enough hooks that we can.")

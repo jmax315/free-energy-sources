@@ -8,6 +8,8 @@
 
 (<h2> "Setup")
 
+(<h3> "Bundler and rvm: Tools For Keeping Things Neat")
+
 (<p>
  "Before actually proceeding to that app code, there's some basic
 infrastructure to set up. I am a fan of " (<code> "rvm") " for keeping
@@ -30,6 +32,8 @@ on the "
 (<a> #:href "https://github.com/jmax315/ruby-explorer/wiki/Notes" "Notes")
 " page.")
 
+(<h3> "RSpec: Testing the Code")
+
 (<p>
  "I strongly prefer to code in a test-driven fashion, writing the
 tests before the code (spikes are an exception, and that's one of the
@@ -43,7 +47,7 @@ installing that's next:"
   #:class "lang-shell"
   (<include> "exploring_ror/creating_the_app.files/rspec-setup.txt")))
 
-(<h3> "The CLI")
+(<h3> "Starting the User Interface: The CLI")
 
 (<p>
  "As an architecture for command-line applications in general, it's

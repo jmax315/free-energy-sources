@@ -7,4 +7,274 @@
 
 (<h2> "The Probe Class")
 
-(<p> "Coming soon")
+(<h3> "Inserting the Probe")
+
+(<p>
+ "Time to put some meat on the probe. The probe is a little unusual,
+for Ruby code, in that it doesn't just have class
+definitions. Thinking about the probe's environment, it gets loaded
+with Ruby's " (<code> "-r") " option when " (<code> "RubyExplorer") "
+starts up the target app. So there's going to have to be a little bit
+of immediate code in there; code which actually executes at the time
+that it's loaded, and wraps " (<code> "require") " and the other file-loading functions.")
+
+(<p> "But that's going to present a problem for testing,
+in that we don't want that immediate code to screw things up when we
+load " (<code> "probe.rb") " in our tests; in particular
+we " (<em> "do not") " want " (<code> "require") " to get wrapped
+during testing. What to do?")
+
+(<p>
+"Let's step back a minute. Suppose that instead of putting that
+immediate code into probe.rb, we move it out to a different file, and
+then have " (<code> "RubyExplorer") " pass " (<em> "that") " file
+using " (<code> "-r") " when we spawn the target app. Then we can
+safely load up " (<code> "probe.rb") " in our tests. Furthermore,
+because the immediate code is separated out, we can safely test it
+too; we just have to make sure we use RSpec to stub out any dangerous
+methods on the probe first.")
+
+(<p>
+ "OK, let's try this plan out. We'll create a
+method, " (<code> "Probe#install") ", which will do the dirty
+work (whatever that dirty work turns out to be), and call it from a
+new file called "(<code> "probe_loader.rb") ". The first order of
+business is to change our test for " (<code> "RubyExplorer") " to
+require our probe loader, instead of the probe itself:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "spawn-with-probe-loader"
+ #:file "spec/unit/ruby_explorer_spec.rb"
+ #:start-line 30
+ #:end-line 39)
+
+(<p> "The change to " (<code> "RubyExplorer") " itself is obvious:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "spawn-with-probe-loader"
+ #:file "src/ruby_explorer.rb")
+
+(<p> "That taken care of, let's create a test for load_probe.rb:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "create-probe-loader"
+ #:file "spec/unit/probe_loader_spec.rb")
+
+(<p> "Then we can create " (<code> "probe_loader.rb") " and
+modify " (<code> "Probe") " to make the test pass:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "create-probe-loader"
+ #:file "src/probe_loader.rb")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "create-probe-loader"
+ #:file "src/probe.rb")
+
+(<h3> "Expanding the Probe")
+
+(<p>
+ "The next thing is to have " (<code> "Probe#install") " actually
+wrap " (<code> "require") ", " (<code> "require_relative") ",
+and " (<code> "load") ". We start out by having it
+call " (<code> "wrap") " for " (<code> "require") ": ")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "probe-wraps-require"
+ #:file "spec/unit/probe_spec.rb")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "probe-wraps-require"
+ #:file "src/probe.rb")
+
+(<p> "Adding " (<code> "require_relative") " and " (<code> "load") ":")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "install-complete"
+ #:file "spec/unit/probe_spec.rb")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "install-complete"
+ #:file "src/probe.rb")
+
+(<p>
+ "Now that we have " (<code> "Probe#install") " working correctly,
+let's actually wrap some code. We face a problem that we didn't in our
+spikes: How to test? If we follow our spikes' lead, our wrapper could
+just print to $stdout, and then we could check to make sure that we
+generate the expected output.")
+
+(<p>
+ "But ultimately, as we noted a while ago, we don't want our wrappers
+to interfere with the target's output. So let's try another approach,
+and delegate things to a callback. Ruby supports this sort of thing,
+by allowing any method call to also pass a block of
+code. Testing " (<code> "Probe#wrap") " then looks like:" )
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "implement-wrap"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 26
+ #:end-line 46)
+
+(<p> "And the code is:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "implement-wrap"
+ #:file "src/probe.rb"
+ #:start-line 8
+ #:end-line 11)
+
+(<h3> "Making the Wrappers Transparent")
+
+(<p>
+ "Unlike our spike, we never call the original code. This will not do
+as a permanent state, so let's fix that next. The test:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "pass-original-method-fail"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 26
+ #:end-line 58)
+
+(<p> "Taking our spike as an example, we try to make it pass:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "pass-original-method-fail"
+ #:file "src/probe.rb"
+ #:start-line 8
+ #:end-line 13)
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/creating_the_probe.files/failed-wrap.txt")))
+
+(<p>
+ "Failure! What went wrong? Everything worked in our spikes... After
+perusing the Ruby documentation for a bit, we realize that we lucked
+out a bit in our spikes. They wrap " (<code> "require") ", which is a
+method in the " (<code> "Kernel") " module, whereas our test is trying
+to wrap an instance method in an object.")
+
+(<p> "The rules are a little different for wrapping methods in a
+class. Instead of using " (<code> "method") " to find the original
+method, we must use " (<code> "instance_method") ". But " (<code> "instance_method")
+" returns an " (<em> "unbound method") ", which can't be called until it is connected ("
+(<em> "bound") ", in Ruby's terminology) to an object. We do this
+using " (<code> "bind") ". In essence, the unbound method has
+no " (<code> "self") ", and what we do with " (<code> "bind")
+" is provide a value for " (<code> "self") ".")
+
+(<p> "The final code ends up looking like:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "pass-original-method"
+ #:file "src/probe.rb"
+ #:start-line 8
+ #:end-line 13)
+
+(<p> "And we're back to passing tests.")
+
+(<h3> "We Need More Wrappers")
+
+(<p> "This little speed bump suggests that we've got a couple more
+cases of wrapping a method that we need to consider, though: wrapping
+a class method, and wrapping a module method.")
+
+(<p>
+ "Turning to wrapping class methods, we'll
+create " (<code> "Probe#wrap_class_method") ", and add a test for it:"
+)
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "wrap-class-method"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 60
+ #:end-line 86)
+
+(<p> "With the implementation:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "wrap-class-method"
+ #:file "src/probe.rb"
+ #:start-line 15
+ #:end-line 20)
+
+(<p> "On to wrapping a module metod. The Ruby documentation, as well
+as our original spikes, suggest that our existing " (<code> "wrap") "
+method should hand wrapping a module method without change. Let's add
+another test, where we try to wrap a module method, and see.")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "wrap-module-method"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 88
+ #:end-line 124)
+
+(<p> "And it works.")
+
+(<h3> "The Wrappers and Arguments")
+
+(<p> "The final stage before we're ready to try this all out on our
+target Rails app is to handle the arguments of the wrapped
+function. Right now, we aren't passing any arguments when we call the
+original method, and that's pretty obviously not going to work. Let's
+add tests to each of our method wrapping cases (instance, class, and
+module methods), to force us to pass the method arguments through. We
+have to tweak the test setup a bit to do this, but only a little. The
+test code ends up looking like:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "pass-wrapper-arguments"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 26
+ #:end-line 142)
+
+(<p> "And modifying the code to actually pass arguments through to the
+wrapper, we have:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "pass-wrapper-arguments"
+ #:file "src/probe.rb")
+
+(<p> "Looking at our wrappers, we notice that we've ommited something
+very important from our tests: return values. Right now, we're
+completely ignoring the return value from the method we've
+wrapped. This hasn't bitten us, because Ruby's convention of returning
+the final value computed in a method means that we are, in fact,
+returning the correct values. (And honestly, nobody ever pays
+attention to the return values
+from " (<code> "require") ", " (<code> "require_relative") ",
+and " (<code> "load") " anyway). Still it's an embarrassing omission, so
+let's get it fixed before anyone notices.")
+
+(<p> "Adding tests for each of our three scenarios, we have:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "return-values-tests"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 26
+ #:end-line 157)
+
+(<p> "On to the next thing: Let's try it out on our target app.")
