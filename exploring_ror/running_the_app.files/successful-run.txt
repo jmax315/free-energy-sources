@@ -1,0 +1,33 @@
+jmax@deepthought ~/projects/ruby-explorer $ bin/ruby-explorer ../bare-rails
+jmax@deepthought ~/projects/ruby-explorer $ load(["/home/jmax/projects/bare-rails/bin/spring"])
+require(["rubygems"])
+require(["rubygems"]): returned false
+require(["bundler"])
+require(["bundler/compatibility_guard"])
+require(["rubygems"])
+require(["rubygems"]): returned false
+require(["bundler/version"])
+require(["rubygems"])
+require(["rubygems"]): returned false
+  :
+  :
+require_relative(["../config/boot"])
+require(["/home/jmax/projects/bare-rails/bin/../config/boot"])
+  :
+  :
+=> Booting Puma
+=> Rails 6.0.2.2 application starting in development
+=> Run `rails server --help` for more startup options
+  :
+  :
+load(["/home/jmax/.rvm/gems/ruby-2.5.5/gems/actionmailbox-6.0.2.2/config/routes.rb", false])
+load(["/home/jmax/.rvm/gems/ruby-2.5.5/gems/actionmailbox-6.0.2.2/config/routes.rb", false]): returned true
+load(["/home/jmax/.rvm/gems/ruby-2.5.5/gems/activestorage-6.0.2.2/config/routes.rb", false])
+load(["/home/jmax/.rvm/gems/ruby-2.5.5/gems/activestorage-6.0.2.2/config/routes.rb", false]): returned true
+Puma starting in single mode...
+* Version 4.3.3 (ruby 2.5.5-p157), codename: Mysterious Traveller
+* Min threads: 5, max threads: 5
+* Environment: development
+* Listening on tcp://127.0.0.1:3000
+* Listening on tcp://[::1]:3000
+Use Ctrl-C to stop

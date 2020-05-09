@@ -1,0 +1,56 @@
+jmax@deepthought $ bin/ruby-explorer ../bare-rails/
+require(rubygems): already loaded
+require(rubygems): already loaded
+require(rubygems): already loaded
+require(bundler/version): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/bundler/version.rb
+require(bundler/compatibility_guard): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/bundler/compatibility_guard.rb
+require(etc): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/2.5.0/x86_64-linux/etc.so
+require(bundler/vendor/fileutils/lib/fileutils): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/bundler/vendor/fileutils/lib/fileutils.rb
+require(bundler/vendored_fileutils): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/bundler/vendored_fileutils.rb
+  :
+  :
+require(bundler/remote_specification): already loaded
+require(bundler/stub_specification): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/bundler/stub_specification.rb
+require(bundler/endpoint_specification): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/bundler/endpoint_specification.rb
+require(bundler/setup): loaded /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/bundler/setup.rb
+require_relative(bootsnap/version): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/version.rb
+require_relative(bootsnap/bundler): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/bundler.rb
+require_relative(../explicit_require): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/explicit_require.rb
+require_relative(load_path_cache/path_scanner): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/path_scanner.rb
+require_relative(path_scanner): already loaded
+require_relative(load_path_cache/path): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/path.rb
+require_relative(../explicit_require): already loaded
+require_relative(load_path_cache/cache): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/cache.rb
+require_relative(../explicit_require): already loaded
+require_relative(load_path_cache/store): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/store.rb
+require_relative(load_path_cache/change_observer): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/change_observer.rb
+require_relative(load_path_cache/loaded_features_index): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/loaded_features_index.rb
+require_relative(load_path_cache/realpath_cache): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/realpath_cache.rb
+require_relative(bootsnap/load_path_cache): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache.rb
+require_relative(bootsnap/compile_cache): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/compile_cache.rb
+require_relative(../bootsnap): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap.rb
+require_relative(load_path_cache/core_ext/kernel_require): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb
+require(/home/jmax/projects/bare-rails/bin/../config/boot): loaded /home/jmax/projects/bare-rails/config/boot.rb
+require_relative(../config/boot): loaded /home/jmax/projects/bare-rails/config/boot.rb
+=> Booting Puma
+=> Rails 6.0.2.2 application starting in development
+=> Run `rails server --help` for more startup options
+load(/home/jmax/projects/bare-rails/config/initializers/application_controller_renderer.rb): loaded /home/jmax/projects/bare-rails/config/initializers/application_controller_renderer.rb
+load(/home/jmax/projects/bare-rails/config/initializers/assets.rb): loaded /home/jmax/projects/bare-rails/config/initializers/assets.rb
+load(/home/jmax/projects/bare-rails/config/initializers/backtrace_silencers.rb): loaded /home/jmax/projects/bare-rails/config/initializers/backtrace_silencers.rb
+load(/home/jmax/projects/bare-rails/config/initializers/content_security_policy.rb): loaded /home/jmax/projects/bare-rails/config/initializers/content_security_policy.rb
+load(/home/jmax/projects/bare-rails/config/initializers/cookies_serializer.rb): loaded /home/jmax/projects/bare-rails/config/initializers/cookies_serializer.rb
+load(/home/jmax/projects/bare-rails/config/initializers/filter_parameter_logging.rb): loaded /home/jmax/projects/bare-rails/config/initializers/filter_parameter_logging.rb
+load(/home/jmax/projects/bare-rails/config/initializers/inflections.rb): loaded /home/jmax/projects/bare-rails/config/initializers/inflections.rb
+load(/home/jmax/projects/bare-rails/config/initializers/mime_types.rb): loaded /home/jmax/projects/bare-rails/config/initializers/mime_types.rb
+load(/home/jmax/projects/bare-rails/config/initializers/wrap_parameters.rb): loaded /home/jmax/projects/bare-rails/config/initializers/wrap_parameters.rb
+load(/home/jmax/projects/bare-rails/config/routes.rb): loaded /home/jmax/projects/bare-rails/config/routes.rb
+load(/home/jmax/.rvm/gems/ruby-2.5.5/gems/actionmailbox-6.0.2.2/config/routes.rb): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/actionmailbox-6.0.2.2/config/routes.rb
+load(/home/jmax/.rvm/gems/ruby-2.5.5/gems/activestorage-6.0.2.2/config/routes.rb): loaded /home/jmax/.rvm/gems/ruby-2.5.5/gems/activestorage-6.0.2.2/config/routes.rb
+Puma starting in single mode...
+* Version 4.3.3 (ruby 2.5.5-p157), codename: Mysterious Traveller
+* Min threads: 5, max threads: 5
+* Environment: development
+* Listening on tcp://127.0.0.1:3000
+* Listening on tcp://[::1]:3000
+Use Ctrl-C to stop

@@ -1,0 +1,5 @@
+  :
+require_relative "../config/boot"
+
+/home/jmax/projects/bare-rails/bin/rails:8:in `<top (required)>'
+  :

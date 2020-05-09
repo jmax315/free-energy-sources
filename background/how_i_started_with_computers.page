@@ -50,6 +50,10 @@ Altair; it only had 256 bytes (yup, 1/4k) of memory, for example. But
 it was only about $100 of parts; less if you scrounged a little."
 )
 
+(<img> #:src "/images/background/Cosmac_Elf.png"
+       #:width 400
+       #:height 544)
+
 (<p> "And so I scraped together enough money for it.")
 
 (<p>

@@ -3,11 +3,12 @@
 (add-tag! "exploring-rails-projects-with-metaprogramming" 6)
 (set-up! "toc.html")
 (set-prev! "creating_the_app_class.html")
+(set-next! "running_the_app.html")
 
 
 (<h2> "The Probe Class")
 
-(<h3> "Inserting the Probe")
+(<h3> "Details of Inserting the Probe")
 
 (<p>
  "Time to put some meat on the probe. The probe is a little unusual,
@@ -116,9 +117,12 @@ generate the expected output.")
 (<p>
  "But ultimately, as we noted a while ago, we don't want our wrappers
 to interfere with the target's output. So let's try another approach,
-and delegate things to a callback. Ruby supports this sort of thing,
-by allowing any method call to also pass a block of
-code. Testing " (<code> "Probe#wrap") " then looks like:" )
+and delegate things to a callback. Ruby supports this sort of thing by
+allowing any method call to also pass a block of code. So we'll pass a
+block of code to " (<code> "wrap") ", which will become the body of
+the wrapper.")
+
+(<p> "Testing " (<code> "Probe#wrap") " then looks like:" )
 
 (<git-code>
  #:git-repo "https://github.com/jmax315/ruby-explorer.git"

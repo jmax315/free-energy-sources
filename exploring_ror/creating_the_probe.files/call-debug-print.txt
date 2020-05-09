@@ -1,0 +1,7 @@
+  :
+  :
+/home/jmax/projects/ruby-explorer/src/probe.rb:30:in `block in wrap'
+/home/jmax/projects/bare-rails/bin/rails:8:in `<top (required)>'
+/home/jmax/projects/ruby-explorer/src/probe.rb:23:in `load'
+  :
+  :

@@ -2,8 +2,20 @@
 (set-subtitle! "Overview")
 (add-tag! "an_lc_ladder_filter_calculator" 1)
 
+(<img> #:src "/images/lc_calculator/fifth_order_butterworth_4mhz.png"
+       #:width 684
+       #:height 295
+       #:alt "4 MHz fifth-order Butterworth low-pass ladder filter")
+
+(<br>)
+
+(<div> #:class "caption"
+       "4 MHz fifth-order Butterworth low-pass ladder filter")
+
+(<br>)
+
 (<p>
- "There's a kind of electronic circuit know as a filter, whose purpose
+ "There's a kind of electronic circuit known as a filter, whose purpose
 is to allow only certain frequencies through. If you've ever used an
 old-school graphic equalizer on a sound system, or even bass and
 treble knobs, you've been adjusting a filter circuit."
@@ -34,19 +46,15 @@ JavaScript."
 
 (<p>
  "A raw JavaScript application, however, can drive you crazy. It's
-pretty easy to do simple things, but as you start adding features, you
-quickly hit a threshold where the code has a tendency to become
-overwhelming. And you generally hit that threshold without much warning."
- )
-
-(<p>
- "To deal with the complexity problem, people have been creating
-application frameworks for in-browser JavaScript for some time. Of the
-current crop of frameworks, I prefer React."
- )
+pretty easy to do simple things, but as you start adding features
+without an overall framework, you quickly hit a threshold where
+interactions among the various bits code becomes overwhelming. And you
+generally hit that threshold without much warning. To deal with that
+problem, people have been creating application frameworks for
+in-browser JavaScript for some time. Of the current crop of
+frameworks, I prefer React.")
 
 (<p>
  "So, that's the short-form description of the project: An in-browser
 calculator, written in JavaScript/React, for designing LC ladder
-filters."
-)
+filters.")

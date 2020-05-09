@@ -1,0 +1,48 @@
+jmax@deepthought $ bin/ruby-explorer ../bare-rails
+jmax@deepthought $ load "/home/jmax/projects/bare-rails/bin/spring"
+require "rubygems"
+require "bundler"
+require "bundler/compatibility_guard"
+require "rubygems"
+  :
+  :
+require "bundler/endpoint_specification"
+require_relative "../bootsnap"
+require_relative "bootsnap/version"
+require_relative "bootsnap/bundler"
+require_relative "bootsnap/load_path_cache"
+require_relative "load_path_cache/path_scanner"
+require_relative "../explicit_require"
+require_relative "load_path_cache/path"
+require_relative "path_scanner"
+require_relative "load_path_cache/cache"
+require_relative "../explicit_require"
+require_relative "load_path_cache/store"
+require_relative "../explicit_require"
+require_relative "load_path_cache/change_observer"
+require_relative "load_path_cache/loaded_features_index"
+require_relative "load_path_cache/realpath_cache"
+require_relative "bootsnap/compile_cache"
+require_relative "load_path_cache/core_ext/kernel_require"
+=> Booting Puma
+=> Rails 6.0.2.2 application starting in development
+=> Run `rails server --help` for more startup options
+load "/home/jmax/projects/bare-rails/config/initializers/application_controller_renderer.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/assets.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/backtrace_silencers.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/content_security_policy.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/cookies_serializer.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/filter_parameter_logging.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/inflections.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/mime_types.rb"
+load "/home/jmax/projects/bare-rails/config/initializers/wrap_parameters.rb"
+load "/home/jmax/projects/bare-rails/config/routes.rb"
+load "/home/jmax/.rvm/gems/ruby-2.5.5/gems/actionmailbox-6.0.2.2/config/routes.rb"
+load "/home/jmax/.rvm/gems/ruby-2.5.5/gems/activestorage-6.0.2.2/config/routes.rb"
+Puma starting in single mode...
+* Version 4.3.3 (ruby 2.5.5-p157), codename: Mysterious Traveller
+* Min threads: 5, max threads: 5
+* Environment: development
+* Listening on tcp://127.0.0.1:3000
+* Listening on tcp://[::1]:3000
+Use Ctrl-C to stop

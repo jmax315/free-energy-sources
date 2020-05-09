@@ -1,0 +1,282 @@
+(set-title! "Exploring Ruby on Rails Projects With Metaprogramming")
+(set-subtitle! "Running the App")
+(add-tag! "exploring-rails-projects-with-metaprogramming" 7)
+(set-up! "toc.html")
+(set-prev! "creating_the_probe.html")
+
+(<h3> "Running the app")
+
+(<p> "Time to try out ruby-explorer on our Rails app:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/running_the_app.files/first-run.txt")))
+
+(<p> "Works great. Right up until the first call
+to " (<code> "require_relative") ", when it blows up. Our problem is
+that " (<code> "require_relative") " looks for the specified file
+relative to the file that it's called from. And our wrapper calls the
+original " (<code> "require_relative") " from a different file than
+our wrapper was called from. Bah. How annoying.")
+
+(<h3> "Faking require_relative")
+
+(<p> "How to deal with this? Well, if we can figure out what file our
+wrapper is getting called from, then we can find the file ourselves
+and call " (<code> "require") ". Amazingly, Ruby actually lets us do
+that. The " (<code> "caller") " method gives us a copy of the call
+stack. Sticking a debug print into our " (<code> "require_relative") "
+wrapper, so we can see exactly what we have, like this:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "caller-debug"
+ #:file "src/probe.rb"
+ #:start-line 10
+ #:end-line 18)
+
+(<p> "We get the result:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/running_the_app.files/caller-output.txt")))
+
+(<p> "The first entry is us; when we call " (<code> "caller") ", we
+push a frame onto the stack, and " (<code> "caller") " dutifully
+reports that to us. The second entry is in the middle
+of " (<code> "wrap") ". The third one is the code that called our
+wrapper, and the one we're interested in. We can pass a couple
+arguments to " (<code> "caller") " in case we're only interested in
+part of the stack, as here. By changing our call
+to " (<code> "caller(2,1)") ", we can get just the frame we're
+interested in.")
+
+(<p> "The return value from " (<code> "caller") " is still an array,
+even though we only asked for one entry. Using " (<code> "first") ",
+we can get the first (and only) element of the array. We could do the
+same thing with a subscript, but I think using " (<code> "first") " is
+slightly clearer. We can then use " (<code> "split") " and another
+call to " (<code> "first") " to get the actual path of our
+caller. Putting it all together, we
+use " (<code> "caller.first.split(\":\").first") " - and we have the
+full path of the file that called our wrapper.")
+
+(<p> "File path in hand, our wrapper
+for " (<code> "require_relative") " becomes:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "fake-require-relative"
+ #:file "src/probe.rb"
+ #:start-line 10
+ #:end-line 21)
+
+(<p> "And when we try running ruby-explorer again, we get:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/running_the_app.files/successful-run.txt")))
+
+(<p> "Our target app started! Success! Or is it?")
+
+(<h3> "Another thing to cope with")
+
+(<p> "Thinking back to our original problem, we remember that it was
+\"I want to know all of the files loaded by a Rails project.\"
+Have we done that? Sadly, no. Look at the very first call
+to " (<code> "require") " in our output.  We report that we've been
+asked to " (<code> "require(\"rubygems\")") ". Where is that file
+located?")
+
+(<p> "To answer that, we need to dig into the details of the functions
+we're wrapping. The easiest case
+is " (<code> "require_relative") ". It simply looks for the specified
+file relative to the current file.")
+
+(<p> " Life is more complicated for " (<code> "require") "
+and " (<code> "load") ". In those cases, the code looks at the first
+character of the filename. If it's '/', '~', or '.', then it just
+looks for the file as specified, as an absolute path, a path relative
+to the current user's home directory, or relative to the current
+directory, respectively. Pretty simple.")
+
+(<p> "But most of the calls to " (<code> "require") " in our output so
+far aren't like that. They look like, for
+example, " (<code> "require('bundler')") ". In these cases, Ruby will
+use the global variable " (<code> "$LOAD_PATH") ", which consists of a
+list of directories. Ruby checks each of them, in order, looking to
+see if (in our example) there's a file called " (<code> "bundler") ", " (<code> "bundler.rb")
+", or " (<code> "bundler.so") ". If so, it loads that file. If not, it
+checks the next directory.")
+
+(<p> "Just to make life even more interesting,
+in the case of " (<code> "require") ", RubyGems gets into the act as well. It
+actually does something like what we're doing; it replaces Ruby's
+" (<code> "require") " with it's own version.  Its version searches over
+the " (<code> "$LOAD_PATH") ", as described above. If it doesn't find
+the file that way, then it searches the installed gems for the
+file. If it finds the file, it " (<em> "activates") " the gem that it
+found the file in.")
+
+(<p> "What 'activates' means in this context is that the gem's
+directories are added to " (<code> "$LOAD_PATH") ". This is a little
+vague, because it's actually the gem's code which adds entries to
+$LOAD_PATH. " (<em> "Usually") ", just the gem's lib directory will be
+added, but that's only a convention, so we can't rely on it.")
+
+(<p> "This so-called 'RubyGems hack' is actually the mechanism that
+resolves most of our calls, so we can't neglect it.")
+
+(<p> "So, how do we deal with all this?
+Checking " (<code> "$LOAD_PATH") " isn't too bad; we can implement
+that. Duplicating the RubyGems hack, on the other hand, would require
+repeating a significant chunk of RubyGems' code. Worse, some of the
+selected gem's code would likely get executed twice; once by RubyGems,
+and once by us.")
+
+(<p> "We're saved by a few things:")
+
+(<ul>
+ (<li> "First, when we " (<code> "require") " a
+file, " (<code> "require") " returns false if the file was already
+loaded. Remember that " (<code> "require") " promises to never load
+the same file twice. So if our call-through to the original version
+of " (<code> "require") " returns " (<code> "false") ", we're done; no
+additional file was loaded by the call.")
+
+ (<li> "Second, " (<code> "require_relative") " makes the same
+promise; if it returns " (<code> "false") ", we're done.")
+
+ (<li> "Third, the way in which " (<code> "require") "
+and " (<code> "require_relative") " implement that feature is helpful
+to us. They do it by stashing the " (<em> "absolute") " path of each
+file pulled in by " (<code> "require") "
+or " (<code> "require_relative") " in the
+array " (<code> "$LOADED_FEATURES") ". So if " (<code> "require") "
+or " (<code> "require_relative") " returns " (<code> "true") ", we can
+search " (<code> "$LOADED_FEATURES") " to pick up the absolute path of
+the loaded file."))
+
+(<p> "In summary, for "(<code> "require") "
+and " (<code> "require_relative") ", we can
+check " (<code> "$LOADED_FEATURES") " after the
+call. For " (<code> "load") ", we can see if the file exists relative
+to the current directory, and if not,
+check " (<code> "$LOAD_PATH") ".")
+
+(<h3> "Finding " (<code> "require") "'d files")
+
+(<p> "So, let's implement tests for all
+this. Taking " (<code> "require") "
+and " (<code> "require_relative") " first, it seems good to implement the code for
+finding the actual file loaded in a new
+method, " (<code> "require_file(file, loaded_features)")
+". The first argument is the filename passed to " (<code> "require") "
+or " (<code> "require_relative") ", and the second
+is " (<code> "$LOADED_FEATURES") ". This brings out an interesting
+feature of TDD; we have that second argument to make testing easier,
+but it's actually a better design; the method isn't coupled to a
+global variable any more.")
+
+(<p> "Our tests for it are:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "clean-wrappers"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 173
+ #:end-line 222)
+
+(<p> "And the implementation is:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "clean-wrappers"
+ #:file "src/probe.rb"
+ #:start-line 54
+ #:end-line 68)
+
+(<p> "We first use " (<code> "Pathname#basename") " strip off any
+directory component of the requested filename, so we're left with just
+the filename. Then, we generate a regex from the filename. If the
+filename already has an extension, then we use a regex which will
+match exactly that filename, with any directory path in front of
+it. If, on the other hand, the requested filename doesn't already have
+an extension, then we use a regex which will match either a .so or a
+.rb file, again, with any directory path in front of it.")
+
+(<p> "Having set up our regex to match the file we're looking for, we
+then scan through " (<code> "$LOADED_FEATURES") " for our file.  We
+start at the end of the array and search backward, because entries are
+added at the end, so we'll find the one we want more quickly.")
+
+(<p> "And that's the hard work for " (<code> "require") "
+and " (<code> "require_relative") " sorted out.")
+
+(<h3> "Finding " (<code> "load") "'d files")
+
+(<p> "Turning to " (<code> "load") " next, we follow a similar design. This time,
+our new method is " (<code> "load_file(filename, load_path)."))
+
+(<p> "Our tests look like:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "clean-wrappers"
+ #:file "spec/unit/probe_spec.rb"
+ #:start-line 224
+ #:end-line 248)
+
+(<p> "And the implementation is:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "clean-wrappers"
+ #:file "src/probe.rb"
+ #:start-line 70
+ #:end-line 85)
+
+(<p> "The actual code to generate our output messages is verbose
+enough that it clutters the wrappers and makes them harder to
+follow. So we add two small utility methods which move the details of
+generating our output messages out of the wrapper:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "clean-wrappers"
+ #:file "src/probe.rb"
+ #:start-line 42
+ #:end-line 52)
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "clean-wrappers"
+ #:file "src/probe.rb"
+ #:start-line 87
+ #:end-line 94)
+
+(<p> "And our " (<code> "install") " method, with all three wrappers, ends up looking like:")
+
+(<git-code>
+ #:git-repo "https://github.com/jmax315/ruby-explorer.git"
+ #:commit-ish "clean-wrappers"
+ #:file "src/probe.rb"
+ #:start-line 4
+ #:end-line 22)
+
+(<h3> "Running the app: One More Time")
+
+(<p> "So, let's try running our target app again:")
+
+(<pre>
+ (<code>
+  #:class "lang-shell"
+  (<include> "exploring_ror/running_the_app.files/second-successful-run.txt")))
+
+(<p> "And there we are! A full trace of every file pulled into our
+target Rails app, with full file paths for every file.")
+
+(<p> "Phew!")

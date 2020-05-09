@@ -1,0 +1,49 @@
+jmax@deepthought ~/projects/ruby-explorer $ bin/ruby-explorer ../bare-rails
+jmax@deepthought ~/projects/ruby-explorer $ load(["/home/jmax/projects/bare-rails/bin/spring"])
+require(["rubygems"])
+require(["rubygems"]): returned false
+require(["bundler"])
+require(["bundler/compatibility_guard"])
+require(["rubygems"])
+require(["rubygems"]): returned false
+require(["bundler/version"])
+require(["rubygems"])
+require(["rubygems"]): returned false
+  :
+  :
+require(["spring/configuration"])
+require(["spring/configuration"]): returned false
+load(["/home/jmax/projects/bare-rails/bin/rails"])
+load(["/home/jmax/projects/bare-rails/bin/spring"])
+load(["/home/jmax/projects/bare-rails/bin/spring"]): returned true
+require_relative(["../config/boot"])
+Traceback (most recent call last):
+    28: from bin/rails:3:in `<main>'
+    27: from /home/jmax/projects/ruby-explorer/src/probe.rb:28:in `block in wrap'
+    26: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `block in install'
+    25: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `call'
+    24: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `load'
+    23: from /home/jmax/projects/bare-rails/bin/spring:15:in `<top (required)>'
+    22: from /home/jmax/projects/ruby-explorer/src/probe.rb:28:in `block in wrap'
+    21: from /home/jmax/projects/ruby-explorer/src/probe.rb:5:in `block in install'
+    20: from /home/jmax/projects/ruby-explorer/src/probe.rb:5:in `call'
+    19: from /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+    18: from /home/jmax/.rvm/rubies/ruby-2.5.5/lib/ruby/site_ruby/2.5.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+    17: from /home/jmax/.rvm/gems/ruby-2.5.5/gems/spring-2.1.0/lib/spring/binstub.rb:11:in `<top (required)>'
+    16: from /home/jmax/projects/ruby-explorer/src/probe.rb:28:in `block in wrap'
+    15: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `block in install'
+    14: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `call'
+    13: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `load'
+    12: from /home/jmax/.rvm/gems/ruby-2.5.5/gems/spring-2.1.0/bin/spring:49:in `<top (required)>'
+    11: from /home/jmax/.rvm/gems/ruby-2.5.5/gems/spring-2.1.0/lib/spring/client.rb:30:in `run'
+    10: from /home/jmax/.rvm/gems/ruby-2.5.5/gems/spring-2.1.0/lib/spring/client/command.rb:7:in `call'
+     9: from /home/jmax/.rvm/gems/ruby-2.5.5/gems/spring-2.1.0/lib/spring/client/rails.rb:28:in `call'
+     8: from /home/jmax/projects/ruby-explorer/src/probe.rb:28:in `block in wrap'
+     7: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `block in install'
+     6: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `call'
+     5: from /home/jmax/projects/ruby-explorer/src/probe.rb:19:in `load'
+     4: from /home/jmax/projects/bare-rails/bin/rails:8:in `<top (required)>'
+     3: from /home/jmax/projects/ruby-explorer/src/probe.rb:28:in `block in wrap'
+     2: from /home/jmax/projects/ruby-explorer/src/probe.rb:12:in `block in install'
+     1: from /home/jmax/projects/ruby-explorer/src/probe.rb:12:in `call'
+/home/jmax/projects/ruby-explorer/src/probe.rb:12:in `require_relative': cannot load such file -- /home/jmax/projects/ruby-explorer/config/boot (LoadError)
